@@ -7,6 +7,8 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "This article shows the basic Markdown syntax and format."
+forkedFrom: "https://dillonzq.com"
+
 resources:
 - name: "featured-image"
   src: "featured-image.png"
@@ -567,20 +569,20 @@ grunt.initConfig({
 Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header. Note that the pipes do not need to be vertically aligned.
 
 ```markdown
-| Option | Description |
-| ------ | ----------- |
+| Option | Description                                                               |
+| ------ | ------------------------------------------------------------------------- |
 | data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| engine | engine to be used for processing templates. Handlebars is the default.    |
+| ext    | extension to be used for dest files.                                      |
 ```
 
 The rendered output looks like this:
 
-| Option | Description |
-| ------ | ----------- |
+| Option | Description                                                               |
+| ------ | ------------------------------------------------------------------------- |
 | data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| engine | engine to be used for processing templates. Handlebars is the default.    |
+| ext    | extension to be used for dest files.                                      |
 
 The HTML looks like this:
 
@@ -615,20 +617,20 @@ Adding a colon on the right side of the dashes below any heading will right alig
 Adding colons on both sides of the dashes below any heading will center align text for that column.
 
 ```markdown
-| Option | Description |
-|:------:| -----------:|
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| Option |                                                               Description |
+| :----: | ------------------------------------------------------------------------: |
+|  data  | path to data files to supply the data that will be passed into templates. |
+| engine |    engine to be used for processing templates. Handlebars is the default. |
+|  ext   |                                      extension to be used for dest files. |
 ```
 
 The rendered output looks like this:
 
-| Option | Description |
-|:------:| -----------:|
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| Option |                                                               Description |
+| :----: | ------------------------------------------------------------------------: |
+|  data  | path to data files to supply the data that will be passed into templates. |
+| engine |    engine to be used for processing templates. Handlebars is the default. |
+|  ext   |                                      extension to be used for dest files. |
 {{< /admonition >}}
 
 ## 11 Links {#links}

@@ -175,11 +175,7 @@ temp/
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
+!i18n-ally-custom-framework.yml
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files

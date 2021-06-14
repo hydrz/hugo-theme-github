@@ -7,6 +7,8 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Cet article présente la syntaxe et le format de base de Markdown."
+forkedFrom: "https://dillonzq.com"
+
 resources:
 - name: "featured-image"
   src: "featured-image.png"
