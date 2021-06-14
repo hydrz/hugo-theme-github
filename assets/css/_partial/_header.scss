@@ -51,6 +51,10 @@
         padding: 20px;
         font-size: 14px;
 
+        &:last-child {
+          border-bottom: 0;
+        }
+
         .suggestion-row {
           display: flex;
           flex-direction: row;
@@ -74,6 +78,7 @@
           color: var(--color-text-secondary);
         }
 
+        &.cursor,
         &:hover {
           background: var(--color-bg-info-inverse);
           .suggestion-title {
