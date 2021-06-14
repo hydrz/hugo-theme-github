@@ -36,7 +36,7 @@
 
 {{- /* style.min.css */ -}}
 {{- $style := dict "Source" "css/style.scss" "Fingerprint" $fingerprint -}}
-{{- $options := dict "targetPath" "css/style.min.css" "enableSourceMap" true -}}
+{{- $options := dict "targetPath" "css/style.min.css" "enableSourceMap" true "includePaths" "node_modules" -}}
 {{- $style = dict "Context" . "ToCSS" $options | merge $style -}}
 {{- partial "plugin/style.html" $style -}}
 
@@ -49,3 +49,18 @@
 {{- $source := $cdn.animateCSS | default "lib/animate/animate.min.css" -}}
 {{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
 {{- partial "plugin/style.html" $style -}}
+
+
+{{- /* github css */ -}}
+{{- $source := $cdn.githubFrameworksCSS | default "lib/github/frameworks.css" -}}
+{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
+{{- partial "plugin/style.html" $style -}}
+
+{{- $source := $cdn.githubBehaviorsCSS | default "lib/github/behaviors.css" -}}
+{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
+{{- partial "plugin/style.html" $style -}}
+
+{{- $source := $cdn.githubGithubCSS | default "lib/github/github.css" -}}
+{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
+{{- partial "plugin/style.html" $style -}}
+

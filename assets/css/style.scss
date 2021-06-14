@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+@import "@primer/css/core/index.scss";
+
 @import "_variables";
 @import "_override";
 
@@ -11,7 +13,7 @@
 @import "_page/index";
 
 @import "_partial/header";
-@import "_partial/footer";
+// @import "_partial/footer";
 @import "_partial/pagination";
 
 @import "_core/media";
