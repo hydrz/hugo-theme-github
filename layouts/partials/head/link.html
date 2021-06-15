@@ -35,8 +35,8 @@
 {{- partial "plugin/style.html" $style -}}
 
 {{- /* style.min.css */ -}}
-{{- $options := dict "targetPath" "css/style.css" "enableSourceMap" true -}}
-{{- $style = dict "Source" "css/style.scss" "ToCSS" $options "Fingerprint" $fingerprint "Minify" true -}}
+{{- $options := (dict "targetPath" "css/style.css" "outputStyle" "compressed" "enableSourceMap" true "includePaths" (slice "node_modules")) -}}
+{{- $style = dict "Source" "css/style.scss" "ToCSS" $options "Fingerprint" $fingerprint -}}
 {{- partial "plugin/style.html" $style -}}
 
 {{- /* Font Awesome */ -}}
