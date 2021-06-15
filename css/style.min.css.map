@@ -1,9 +1,9 @@
 {
 	"version": 3,
 	"file": "style.min.css",
-	"sourceRoot": "/home/runner/work/LoveIt/LoveIt/exampleSite",
+	"sourceRoot": "/home/runner/work/hugo-theme-github/hugo-theme-github/exampleSite",
 	"sources": [
-		"/home/runner/work/LoveIt/LoveIt/assets/css/style.scss",
+		"/home/runner/work/hugo-theme-github/hugo-theme-github/assets/css/style.scss",
 		"node_modules/@primer/css/index.scss",
 		"node_modules/@primer/css/core/index.scss",
 		"node_modules/@primer/css/support/index.scss",

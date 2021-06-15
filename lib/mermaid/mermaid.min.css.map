@@ -1,9 +1,9 @@
 {
 	"version": 3,
 	"file": "mermaid.min.css",
-	"sourceRoot": "/home/runner/work/LoveIt/LoveIt/exampleSite",
+	"sourceRoot": "/home/runner/work/hugo-theme-github/hugo-theme-github/exampleSite",
 	"sources": [
-		"/home/runner/work/LoveIt/LoveIt/assets/lib/mermaid/mermaid.scss",
+		"/home/runner/work/hugo-theme-github/hugo-theme-github/assets/lib/mermaid/mermaid.scss",
 		"assets/lib/mermaid/themes/neutral/index.scss",
 		"assets/lib/mermaid/themes/mermaid.scss",
 		"assets/lib/mermaid/themes/flowchart.scss",
