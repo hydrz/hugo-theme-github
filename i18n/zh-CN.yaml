@@ -3,11 +3,16 @@
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === baseof ==
-backToTop:
-  other: "回到顶部"
+Posts: 所有文章
+Tags: 标签
+Categories: 分类
+Docs: 文档
+About: 关于
+Watch: 阅读量
+Reading: 预计阅读
 
-viewComments:
-  other: "查看评论"
+backToTop: "回到顶部"
+viewComments: "查看评论"
 # === baseof ==
 
 # === Post ===
@@ -118,7 +123,7 @@ wordCount:
   other: "约 {{ .Count }} 字"
 
 readingTime:
-  other: "预计阅读 {{ .Count }} 分钟"
+  other: "{{ .Count }} 分钟"
 
 views:
   other: "次阅读"

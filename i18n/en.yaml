@@ -2,11 +2,16 @@
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === baseof ==
-backToTop:
-  other: "Back to Top"
+Posts: Posts
+Tags: Tags
+Categories: Categories
+Docs: Docs
+About: About
+Watch: Watch
+Reading: Reading
 
-viewComments:
-  other: "View Comments"
+backToTop: "Back to Top"
+viewComments: "View Comments"
 # === baseof ==
 
 # === Post ===

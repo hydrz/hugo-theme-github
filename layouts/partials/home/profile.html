@@ -1,69 +1,72 @@
 {{- $profile := .Site.Params.home.profile -}}
+{{- $author := .Site.Author -}}
 
-<div class="h-card mt-md-n5 mt-5"  itemscope="" itemtype="http://schema.org/Person">
+<div class="h-card mt-md-n5 mt-5" itemscope="" itemtype="http://schema.org/Person">
   <div class="clearfix d-flex d-md-block flex-items-center mb-4 mb-md-0">
     <div class="position-relative d-inline-block col-2 col-md-12 mr-3 mr-md-0 flex-shrink-0" style="z-index: 4">
-        {{- $avatar := $profile.avatarURL -}}
-        {{- with $profile.gravatarEmail -}}
-            {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%v?s=240&d=mp" -}}
-        {{- end -}}
+      {{- $avatar := $profile.avatarURL -}}
+      {{- with $profile.gravatarEmail -}}
+      {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%v?s=240&d=mp" -}}
+      {{- end -}}
 
-        {{- if $avatar -}}
-        {{- $menus := $.Site.Menus.main | default slice -}}
-        {{- with index $menus 0 -}}
-            {{- $url := .URL | relLangURL -}}
-            {{- with .Page -}}
-                {{- $url = .RelPermalink -}}
-            {{- end -}}
-            <a class="d-block" href="{{ $url }}" {{ with .Title | default .Name }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-                <img style="height: auto" alt="" width="260" height="260" class="avatar avatar-user width-full border color-bg-primary" src="{{$avatar}}"/>
-            </a>
-        {{- else -}}
-            <img style="height: auto" alt="" width="260" height="260" class="avatar avatar-user width-full border color-bg-primary" src="{{$avatar}}"/>
-        {{- end -}}
+      {{- if $avatar -}}
+      {{- $menus := $.Site.Menus.main | default slice -}}
+      {{- with index $menus 0 -}}
+      {{- $url := .URL | relLangURL -}}
+      {{- with .Page -}}
+      {{- $url = .RelPermalink -}}
+      {{- end -}}
+      <a class="d-block" href="{{ $url }}" {{ with .Title | default .Name }} title="{{ . }}" {{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank" {{ end }}>
+        <img style="height: auto" alt="" width="260" height="260" class="avatar avatar-user width-full border color-bg-primary" src="{{$avatar}}" />
+      </a>
+      {{- else -}}
+      <img style="height: auto" alt="" width="260" height="260" class="avatar avatar-user width-full border color-bg-primary" src="{{$avatar}}" />
+      {{- end -}}
 
       <div class="user-status-container position-relative hide-sm hide-md">
-        <div class="f5 js-user-status-context user-status-circle-badge-container" >
-          <div class="js-user-status-container user-status-circle-badge d-inline-block lh-condensed-ultra p-2" >
+        <div class="f5 js-user-status-context user-status-circle-badge-container">
+          <div class="js-user-status-container user-status-circle-badge d-inline-block lh-condensed-ultra p-2">
             <summary class="btn-link btn-block Link--secondary no-underline js-toggle-user-status-edit toggle-user-status-edit" role="button">
-                <div class="d-flex flex-items-center flex-items-stretch">
-                  <div class="f6 lh-condensed user-status-header d-inline-flex user-status-emoji-only-header circle">
-                    <div class="user-status-emoji-container flex-shrink-0 mr-2 d-flex flex-items-center flex-justify-center">
-                      <div>
-                        <g-emoji class="g-emoji" alias="milky_way" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f30c.png"> 🌌</g-emoji>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="ws-normal user-status-message-wrapper f6 min-width-0">
-                    <div class="css-truncate css-truncate-target width-fit color-text-primary">
-                      <span>
-                        <div>Focusing</div>
-                      </span>
+              <div class="d-flex flex-items-center flex-items-stretch">
+                <div class="f6 lh-condensed user-status-header d-inline-flex user-status-emoji-only-header circle">
+                  <div class="user-status-emoji-container flex-shrink-0 mr-2 d-flex flex-items-center flex-justify-center">
+                    <div>
+                      <g-emoji class="g-emoji" alias="milky_way"> 🌌</g-emoji>
                     </div>
                   </div>
                 </div>
-              </summary>
+                <div class="ws-normal user-status-message-wrapper f6 min-width-0">
+                  <div class="css-truncate css-truncate-target width-fit color-text-primary">
+                    <span>
+                      {{ with $profile.status }}
+                      <div>{{ . }}</div>
+                      {{ end }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </summary>
           </div>
         </div>
       </div>
       {{- end -}}
     </div>
 
-    <div class="vcard-names-container float-left col-12 py-3 js-sticky js-user-profile-sticky-fields"  style="position: sticky">
+    <div class="vcard-names-container float-left col-12 py-3 js-sticky js-user-profile-sticky-fields" style="position: sticky">
       <h1 class="vcard-names">
         {{- with $profile.title -}}
         <span class="p-name vcard-fullname d-block overflow-hidden" itemprop="name"> {{- . | safeHTML -}} </span>
         {{- end -}}
 
         {{- with $profile.subtitle -}}
-        <span class="p-nickname vcard-username d-block" itemprop="additionalName"> 
-            {{- if $profile.typeit -}}
-            {{- $id := dict "Content" . "Scratch" $.Scratch | partial "function/id.html" -}}
-            <div id="{{ $id }}" class="typeit"></div>
-            {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
-            {{- else -}}
-                {{- . -}}
-            {{- end -}}    
+        <span class="p-nickname vcard-username d-block" itemprop="additionalName">
+          {{- if $profile.typeit -}}
+          {{- $id := dict "Content" . "Scratch" $.Scratch | partial "function/id.html" -}}
+          <div id="{{ $id }}" class="typeit"></div>
+          {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
+          {{- else -}}
+          {{- . -}}
+          {{- end -}}
         </span>
         {{- end -}}
       </h1>
@@ -81,24 +84,22 @@
       <div class="flex-order-1 flex-md-order-none mt-2 mt-md-0">
         <div class="mb-3">
           <ul class="vcard-details">
-            {{- with .Site.Params.social.email -}}
+            {{- with $author.email -}}
             <li itemprop="email" aria-label="Email: {{ . }}" class="vcard-detail pt-1 css-truncate css-truncate-target">
               <svg class="octicon octicon-mail" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-                <path
-                  fill-rule="evenodd"
-                  d="M1.75 2A1.75 1.75 0 000 3.75v.736a.75.75 0 000 .027v7.737C0 13.216.784 14 1.75 14h12.5A1.75 1.75 0 0016 12.25v-8.5A1.75 1.75 0 0014.25 2H1.75zM14.5 4.07v-.32a.25.25 0 00-.25-.25H1.75a.25.25 0 00-.25.25v.32L8 7.88l6.5-3.81zm-13 1.74v6.441c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V5.809L8.38 9.397a.75.75 0 01-.76 0L1.5 5.809z"
-                ></path>
+                <path fill-rule="evenodd"
+                  d="M1.75 2A1.75 1.75 0 000 3.75v.736a.75.75 0 000 .027v7.737C0 13.216.784 14 1.75 14h12.5A1.75 1.75 0 0016 12.25v-8.5A1.75 1.75 0 0014.25 2H1.75zM14.5 4.07v-.32a.25.25 0 00-.25-.25H1.75a.25.25 0 00-.25.25v.32L8 7.88l6.5-3.81zm-13 1.74v6.441c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V5.809L8.38 9.397a.75.75 0 01-.76 0L1.5 5.809z">
+                </path>
               </svg>
               <a class="u-email Link--primary" href="mailto:{{ . }}">{{ . }}</a>
             </li>
             {{- end -}}
-            {{- with .Site.Params.social.github -}}
-            <li itemprop="url"  class="vcard-detail pt-1 css-truncate css-truncate-target">
-              <svg aria-hidden="true" viewBox="0 0 16 16" version="1.1"  height="16" width="16" class="octicon octicon-link">
-                <path
-                  fill-rule="evenodd"
-                  d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
-                ></path>
+            {{- with $author.link -}}
+            <li itemprop="url" class="vcard-detail pt-1 css-truncate css-truncate-target">
+              <svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" height="16" width="16" class="octicon octicon-link">
+                <path fill-rule="evenodd"
+                  d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                </path>
               </svg>
               <a rel="nofollow me" class="Link--primary" href="{{ . }}">{{ . }}</a>
             </li>
@@ -107,56 +108,56 @@
         </div>
       </div>
 
-      <div class="border-top color-border-secondary pt-3 mt-3 clearfix hide-sm hide-md">
+      {{- if $profile.social -}}
+      <div class="border-top color-border-secondary pt-3 mt-3 clearfix">
         <h2 class="mb-2 h4">Organizations</h2>
-        {{- if $profile.social -}}
         <div class="links">
-            {{- $socialMap := resources.Get "data/social.yml" | transform.Unmarshal -}}
-            {{- $socialArr := slice -}}
-            {{- range $key, $value := .Site.Params.social -}}
-                {{- $social := $key | lower | index $socialMap | default dict -}}
-                {{- if $value -}}
-                    {{- if reflect.IsMap $value -}}
-                        {{- with $value.weight -}}
-                            {{- $social = dict "Weight" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.prefix -}}
-                            {{- $social = dict "Prefix" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.template -}}
-                            {{- $social = dict "Template" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.id -}}
-                            {{- $social = dict "Id" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.url -}}
-                            {{- $social = dict "Url" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.title -}}
-                            {{- $social = dict "Title" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.newtab -}}
-                            {{- $social = dict "Newtab" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.icon -}}
-                            {{- $social = dict "Icon" . | merge $social -}}
-                        {{- end -}}
-                    {{- else if ne $value true -}}
-                        {{- $social = dict "Id" $value | merge $social -}}
-                    {{- end -}}
-                    {{- if $social.Icon.Simpleicons -}}
-                        {{- $prefix := ($.Scratch.Get "cdn" | default dict).simpleIconsPrefix -}}
-                        {{- $social = dict "Prefix" $prefix | dict "Icon" | merge $social -}}
-                    {{- end -}}
-                    {{- $socialArr = $socialArr | append $social -}}
-                {{- end -}}
-            {{- end -}}
-            {{- range sort $socialArr "Weight" -}}
-                {{- partial "plugin/social.html" . -}}
-            {{- end -}}
+          {{- $socialMap := resources.Get "data/social.yml" | transform.Unmarshal -}}
+          {{- $socialArr := slice -}}
+          {{- range $key, $value := .Site.Params.social -}}
+          {{- $social := $key | lower | index $socialMap | default dict -}}
+          {{- if $value -}}
+          {{- if reflect.IsMap $value -}}
+          {{- with $value.weight -}}
+          {{- $social = dict "Weight" . | merge $social -}}
+          {{- end -}}
+          {{- with $value.prefix -}}
+          {{- $social = dict "Prefix" . | merge $social -}}
+          {{- end -}}
+          {{- with $value.template -}}
+          {{- $social = dict "Template" . | merge $social -}}
+          {{- end -}}
+          {{- with $value.id -}}
+          {{- $social = dict "Id" . | merge $social -}}
+          {{- end -}}
+          {{- with $value.url -}}
+          {{- $social = dict "Url" . | merge $social -}}
+          {{- end -}}
+          {{- with $value.title -}}
+          {{- $social = dict "Title" . | merge $social -}}
+          {{- end -}}
+          {{- with $value.newtab -}}
+          {{- $social = dict "Newtab" . | merge $social -}}
+          {{- end -}}
+          {{- with $value.icon -}}
+          {{- $social = dict "Icon" . | merge $social -}}
+          {{- end -}}
+          {{- else if ne $value true -}}
+          {{- $social = dict "Id" $value | merge $social -}}
+          {{- end -}}
+          {{- if $social.Icon.Simpleicons -}}
+          {{- $prefix := ($.Scratch.Get "cdn" | default dict).simpleIconsPrefix -}}
+          {{- $social = dict "Prefix" $prefix | dict "Icon" | merge $social -}}
+          {{- end -}}
+          {{- $socialArr = $socialArr | append $social -}}
+          {{- end -}}
+          {{- end -}}
+          {{- range sort $socialArr "Weight" -}}
+          {{- partial "plugin/social.html" . -}}
+          {{- end -}}
         </div>
-      {{- end -}}
       </div>
+      {{- end -}}
     </div>
   </div>
 </div>
