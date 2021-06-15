@@ -9,10 +9,6 @@
 
   @import "themes/neutral/index";
 
-  [theme=dark] & {
-    @import "themes/dark/index";
-  }
-
   div.mermaidTooltip {
     z-index: 50;
   }

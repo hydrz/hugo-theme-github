@@ -3,10 +3,6 @@
     border-bottom: 1px solid $global-border-color;
     padding: 1rem 0 0.3rem;
 
-    [theme=dark] & {
-      border-bottom: 1px solid $global-border-color-dark;
-    }
-
     .post-info-line {
       display: flex;
       justify-content: space-between;
@@ -14,21 +10,12 @@
       .post-info-mod {
         font-size: 0.8em;
         color: $global-font-secondary-color;
-
-        [theme=dark] & {
-          color: $global-font-secondary-color-dark;
-        }
-
         @include link(false, false);
       }
 
       .post-info-license {
         font-size: 0.8em;
         color: $global-font-secondary-color;
-
-        [theme=dark] & {
-          color: $global-font-secondary-color-dark;
-        }
 
         @include link(false, false);
       }

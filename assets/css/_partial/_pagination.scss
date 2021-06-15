@@ -32,10 +32,6 @@
       color: $pagination-link-hover-color;
     }
 
-    [theme=dark] &:hover a {
-      color: $pagination-link-hover-color-dark;
-    }
-
     &:before,
     &:after {
       position: absolute;
@@ -45,11 +41,6 @@
       background: $pagination-link-hover-color;
       @include transition(0.3s);
       bottom: 0px;
-    }
-
-    [theme=dark] &:before,
-    [theme=dark] &:after {
-      background: $pagination-link-hover-color-dark;
     }
 
     &:before .active,
@@ -76,10 +67,6 @@
     &.active {
       a {
         color: $pagination-link-hover-color;
-      }
-
-      [theme=dark] & a {
-        color: $pagination-link-hover-color-dark;
       }
 
       &:before,

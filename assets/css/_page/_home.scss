@@ -1,6 +1,6 @@
 .home {
   .home-profile {
-    @include transform(translateY( 16vh));
+    @include transform(translateY(16vh));
     padding: 0 0 .5rem;
     text-align: center;
 
@@ -58,10 +58,6 @@
       margin: 0;
       padding: .5rem;
       color: $global-font-secondary-color;
-
-      [theme=dark] & {
-        color: $global-font-secondary-color-dark;
-      }
     }
   }
 }
@@ -81,11 +77,6 @@
     padding-bottom: .8rem;
     color: $global-font-color;
     border-bottom: 1px dashed $global-border-color;
-
-    [theme=dark] & {
-      color: $global-font-color-dark;
-      border-bottom: 1px dashed $global-border-color-dark;
-    }
 
     .featured-image-preview {
       width: 100%;
@@ -128,10 +119,6 @@
       @include overflow-wrap(break-word);
       color: $global-font-secondary-color;
 
-      [theme=dark] & {
-        color: $global-font-secondary-color-dark;
-      }
-
       h2,
       h3,
       h4,
@@ -154,12 +141,9 @@
 
       @include link(false, true);
 
-      b, strong {
+      b,
+      strong {
         color: $global-font-secondary-color;
-
-        [theme=dark] & {
-          color: $global-font-secondary-color-dark;
-        }
       }
     }
 

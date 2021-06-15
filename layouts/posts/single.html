@@ -144,7 +144,6 @@
         <readme-toc data-catalyst="">
             <div data-target="readme-toc.content" class="Box mt-3 position-relative ">
                 <div class="Box-header blob-header js-sticky js-position-sticky top-0 p-2 d-flex flex-shrink-0 flex-md-row flex-items-center" style="position: sticky; z-index: 1; top: 0px !important;" data-original-top="0px">
-
                     <details data-target="readme-toc.trigger"
                         data-menu-hydro-click="{&quot;event_type&quot;:&quot;repository_toc_menu.click&quot;,&quot;payload&quot;:{&quot;target&quot;:&quot;trigger&quot;,&quot;repository_id&quot;:185507653,&quot;originating_url&quot;:&quot;https://github.com/hydrz/formatter/blob/master/README.md?_pjax=%23repo-content-pjax-container&quot;,&quot;user_id&quot;:1647194}}"
                         data-menu-hydro-click-hmac="ec482142b48fc1616305ebcc00284d220b3844dbbcd10156350cb22f7af6587b" class="dropdown details-reset details-overlay">
@@ -162,7 +161,7 @@
 
                                     {{- /* Auto TOC */ -}}
                                     {{- if ne $toc.enable false -}}
-                                    <div class=" toc" id="toc-auto">
+                                    <div class="toc" id="toc-auto">
                                         <h2 class="toc-title">{{ T "contents" }}</h2>
                                         <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}" id="toc-content-auto"></div>
                                     </div>

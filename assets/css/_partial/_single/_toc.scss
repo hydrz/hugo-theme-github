@@ -18,10 +18,6 @@
         font-weight: bolder;
         margin-right: .5rem;
         color: $single-link-color;
-
-        [theme=dark] & {
-          color: $single-link-color-dark;
-        }
       }
 
       ul {
@@ -36,76 +32,40 @@
     rt {
       color: $global-font-secondary-color;
     }
-
-    [theme=dark] & {
-      background: $code-background-color-dark;
-
-      rt {
-        color: $global-font-secondary-color-dark;
-      }
-    }
   }
 }
 
 #toc-auto {
-  display: block;
-  position: absolute;
-  width: $MAX_LENGTH;
-  max-width: 0;
-  padding: 0 .8rem;
-  border-left: 4px solid $global-border-color;
-  @include overflow-wrap(break-word);
-  box-sizing: border-box;
-  top: 10rem;
-  left: 0;
-  visibility: hidden;
-
-  [header-desktop=normal] & {
-    top: 5rem;
-  }
-
-  @include blur;
-
-  [theme=dark] & {
-    border-left-color: $global-border-color-dark;
-  }
-
-  .toc-title {
-    margin: .8rem 0;
-  }
-
   .toc-content {
-    &.always-active ul {
+    a {
+      position: relative;
       display: block;
-    }
+      padding: 8px 16px;
+      margin-bottom: 4px;
+      overflow: hidden;
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      cursor: pointer;
+      border-radius: 6px;
+      padding-top: 4px !important;
+      padding-bottom: 4px !important;
 
-    > nav > ul {
-      margin: .625rem 0;
+      &.active,
+      &:hover {
+        color: var(--color-state-selected-primary-text);
+        background-color: var(--color-state-selected-primary-bg);
+      }
     }
 
     ul {
-      ul {
-        display: none;
-      }
-
-      .has-active > ul {
-        display: block;
-      }
-    }
-
-    a.active {
-      font-weight: bold;
-      color: $single-link-color;
-
-      [theme=dark] & {
-        color: $single-link-color-dark;
-      }
-
-      &::before {
-        color: $single-link-hover-color;
-
-        [theme=dark] & {
-          color: $single-link-hover-color-dark;
+      a {
+        &:first-child {
+          &::before {
+            content: "";
+          }
         }
       }
     }
@@ -125,33 +85,21 @@
     justify-content: space-between;
     line-height: 2em;
     padding: 0 .75rem;
-    background: darken($code-background-color, 6%);
-
-    [theme=dark] & {
-      background: darken($code-background-color-dark, 6%);
-    }
+    background: $code-background-color;
   }
 
   .toc-content {
     background-color: $code-background-color;
 
-    > nav > ul {
+    >nav>ul {
       margin: 0;
       padding: .4rem 1rem .4rem 1.8rem;
-    }
-
-    [theme=dark] & {
-      background-color: $code-background-color-dark;
     }
   }
 
   &.open {
     .toc-title {
-      background: darken($code-background-color, 3%);
-
-      [theme=dark] & {
-        background: darken($code-background-color-dark, 3%);
-      }
+      background: $code-background-color;
     }
   }
 }
