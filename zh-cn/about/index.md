@@ -1,4 +1,4 @@
-# 关于 LoveIt
+# 关于 hugo-theme-github
 
 
 {{< style "img { height: 1.25rem; }" >}}
@@ -11,7 +11,7 @@
 > 
 > 它的原型基于 [LoveIt 主题](https://github.com/hydrz/hugo-theme-github) and [github-style 主题](https://github.com/MeiK2333/github-style)。
 
-![hugo-theme-github](/images/preview.png "hugo-theme-github")
+![hugo-theme-github](preview.png "hugo-theme-github")
 
 ## 主题[预览](https://hugo-theme-github.dipp.ink/)
 

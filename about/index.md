@@ -1,4 +1,4 @@
-# About LoveIt
+# About hugo-theme-github
 
 
 {{< style "img { height: 1.25rem; }" >}}
@@ -11,7 +11,7 @@
 >
 > It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt) and [github-style Theme](https://github.com/MeiK2333/github-style).
 
-![hugo-theme-github](/images/preview.png "hugo-theme-github")
+![hugo-theme-github](preview.png "hugo-theme-github")
 
 ## Features
 
