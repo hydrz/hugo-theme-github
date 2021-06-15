@@ -1,5 +1,5 @@
 ---
-title: "About LoveIt"
+title: "About hugo-theme-github"
 date: 2019-08-02T11:04:49+08:00
 draft: false
 
@@ -19,7 +19,7 @@ math:
 >
 > It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt) and [github-style Theme](https://github.com/MeiK2333/github-style).
 
-![hugo-theme-github](/images/preview.png "hugo-theme-github")
+![hugo-theme-github](preview.png "hugo-theme-github")
 
 ## Features
 
