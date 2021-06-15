@@ -273,10 +273,13 @@ class Theme {
 
     initDetails() {
         this.util.forEach(document.getElementsByClassName('details'), $details => {
-            const $summary = $details.getElementsByClassName('details-summary')[0];
-            $summary.addEventListener('click', () => {
-                $details.classList.toggle('open');
-            }, false);
+            const $summaries = $details.getElementsByClassName('details-summary');
+            for (let index = 0; index < $summaries.length; index++) {
+                const $summary = $summaries[index];
+                $summary.addEventListener('click', () => {
+                    $details.classList.toggle('open');
+                }, false);
+            }
         });
     }
 
@@ -359,48 +362,44 @@ class Theme {
     initToc() {
         const $tocCore = document.getElementById('TableOfContents');
         if ($tocCore === null) return;
+        $tocCore.removeAttribute("id");
+
         if (document.getElementById('toc-static').getAttribute('kept') || this.util.isTocStatic()) {
             const $tocContentStatic = document.getElementById('toc-content-static');
-            if ($tocCore.parentElement !== $tocContentStatic) {
-                $tocCore.parentElement.removeChild($tocCore);
-                $tocContentStatic.appendChild($tocCore);
-            }
-            if (this._tocOnScroll) this.scrollEventSet.delete(this._tocOnScroll);
-        } else {
-            const $tocContentAuto = document.getElementById('toc-content-auto');
-            if ($tocCore.parentElement !== $tocContentAuto) {
-                $tocCore.parentElement.removeChild($tocCore);
-                $tocContentAuto.appendChild($tocCore);
-            }
-
-            const $tocLinkElements = $tocCore.querySelectorAll('a');
-            const $headerLinkElements = document.getElementsByClassName('headerLink');
-
-            this._tocOnScroll = this._tocOnScroll || (() => {
-                this.util.forEach($tocLinkElements, $tocLink => { $tocLink.classList.remove('active'); });
-                const INDEX_SPACING = 120;
-                let activeTocIndex = $headerLinkElements.length - 1;
-                for (let i = 0; i < $headerLinkElements.length - 1; i++) {
-                    const thisTop = $headerLinkElements[i].getBoundingClientRect().top;
-                    const nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
-                    if ((i == 0 && thisTop > INDEX_SPACING)
-                        || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
-                        activeTocIndex = i;
-                        break;
-                    }
-                }
-                if (activeTocIndex !== -1) {
-                    $tocLinkElements[activeTocIndex].classList.add('active');
-                    let $parent = $tocLinkElements[activeTocIndex].parentElement;
-                    while ($parent !== $tocCore) {
-                        $parent.classList.add('has-active');
-                        $parent = $parent.parentElement.parentElement;
-                    }
-                }
-            });
-            this._tocOnScroll();
-            this.scrollEventSet.add(this._tocOnScroll);
+            $tocContentStatic.appendChild($tocCore.cloneNode(true));
         }
+
+        const $tocContentAuto = document.getElementById('toc-content-auto');
+        $tocContentAuto.appendChild($tocCore.cloneNode(true));
+
+        const $tocLinkElements = $tocCore.querySelectorAll('a');
+        const $headerLinkElements = document.getElementsByClassName('headerLink');
+
+        this._tocOnScroll = this._tocOnScroll || (() => {
+            this.util.forEach($tocLinkElements, $tocLink => { $tocLink.classList.remove('active'); });
+            const INDEX_SPACING = 120;
+            let activeTocIndex = $headerLinkElements.length - 1;
+            for (let i = 0; i < $headerLinkElements.length - 1; i++) {
+                const thisTop = $headerLinkElements[i].getBoundingClientRect().top;
+                const nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
+                if ((i == 0 && thisTop > INDEX_SPACING)
+                    || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
+                    activeTocIndex = i;
+                    break;
+                }
+            }
+            if (activeTocIndex !== -1) {
+                $tocLinkElements[activeTocIndex].classList.add('active');
+                let $parent = $tocLinkElements[activeTocIndex].parentElement;
+                while ($parent !== $tocCore) {
+                    $parent.classList.add('has-active');
+                    $parent = $parent.parentElement.parentElement;
+                }
+            }
+        });
+        this._tocOnScroll();
+        this.scrollEventSet.add(this._tocOnScroll);
+
     }
 
     initMath() {
