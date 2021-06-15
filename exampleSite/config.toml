@@ -1,4 +1,4 @@
-baseURL = "https://example.com"
+baseURL = "https://hydrz.github.io/LoveIt/"
 # [en, zh-cn, fr, pl, ...] determines default content language
 # [en, zh-cn, fr, pl, ...] 设置默认的语言
 defaultContentLanguage = "en"
@@ -28,7 +28,7 @@ enableEmoji = true
 [author]
 name = "xxxx"
 email = "xxxx@xxxx.com"
-link = "https://example.com"
+link = "https://hydrz.github.io/LoveIt/"
 
 [menu]
   [[menu.main]]
