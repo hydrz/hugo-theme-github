@@ -4,9 +4,11 @@
     {{- $href := .Source -}}
     {{- $integrity := .Integrity -}}
     {{- $resource := 0 -}}
+    
     {{- if $href | and (not (urls.Parse $href).Host) -}}
         {{- $resource = resources.Get $href -}}
     {{- end -}}
+
     {{- with .Content -}}
         {{- $resource = resources.FromString $.Path . -}}
     {{- end -}}
@@ -25,7 +27,8 @@
             {{- $resource = $resource | fingerprint . -}}
             {{- $integrity = $resource.Data.Integrity -}}
         {{- end -}}
-        {{- $href = $resource.Permalink -}}
+        {{- $href = $resource.RelPermalink -}}
     {{- end -}}
+
     <link rel="stylesheet" href="{{ $href }}"{{ if .Crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ with .Attr }} {{ . | safeHTMLAttr }}{{ end }}>
 {{- end -}}

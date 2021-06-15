@@ -26,7 +26,7 @@
         {{- if T "lunrLanguageLib" -}}
             {{- $config = T "lunrLanguageCode" | dict "lunrLanguageCode" | dict "search" | merge $config -}}
             {{ if eq $config.search.lunrLanguageCode "zh" }}
-                {{ $source := resources.Get "lib/lunr/lunr.segmentit.js" | babel | js.Build "lunr.segmentit.js" }}
+                {{ $source := resources.Get "lib/lunr/lunr.segmentit.js" }}
                 {{- $config = dict "lunrSegmentitURL" $source.RelPermalink | dict "search" | merge $config -}}
             {{- end -}}
             {{- dict "Source" "lib/lunr/lunr.stemmer.support.js" "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
@@ -194,8 +194,8 @@
 {{- $config | jsonify | printf "window.config=%s;" | dict "Content" | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 
 {{- /* Theme script */ -}}
-{{- $source := resources.Get "js/theme.js" | babel | js.Build "theme.js"  -}}
-{{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+{{- dict "Source" "js/theme.min.js" "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+{{- $_ := (resources.Get "js/theme.min.js.map").RelPermalink -}}
 
 {{- $source := $cdn.metingJS | default "lib/meting/Meting.min.js" -}}
 {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}

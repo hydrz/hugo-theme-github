@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.algolia-autocomplete:focus ~ .header-search-key-slash {
+.algolia-autocomplete:focus~.header-search-key-slash {
   display: none !important;
 }
 
@@ -38,6 +38,13 @@
         font-size: $h5-size;
         font-weight: $font-weight-bold;
       }
+    }
+
+    .search-footer {
+      color: var(--color-text-secondary);
+      text-align: right;
+      margin-right: 20px;
+      margin-bottom: 10px;
     }
 
     .suggestions {
@@ -81,6 +88,7 @@
         &.cursor,
         &:hover {
           background: var(--color-bg-info-inverse);
+
           .suggestion-title {
             color: var(--color-text-white);
           }
