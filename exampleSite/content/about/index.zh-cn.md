@@ -1,5 +1,5 @@
 ---
-title: "关于 LoveIt"
+title: "关于 hugo-theme-github"
 date: 2019-08-02T11:04:49+08:00
 draft: false
 
@@ -19,7 +19,7 @@ math:
 > 
 > 它的原型基于 [LoveIt 主题](https://github.com/hydrz/hugo-theme-github) and [github-style 主题](https://github.com/MeiK2333/github-style)。
 
-![hugo-theme-github](/images/preview.png "hugo-theme-github")
+![hugo-theme-github](preview.png "hugo-theme-github")
 
 ## 主题[预览](https://hugo-theme-github.dipp.ink/)
 

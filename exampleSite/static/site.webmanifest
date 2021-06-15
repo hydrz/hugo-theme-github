@@ -1,6 +1,6 @@
 {
-    "name": "LoveIt",
-    "short_name": "LoveIt",
+    "name": "hugo-theme-github",
+    "short_name": "hugo-theme-github",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

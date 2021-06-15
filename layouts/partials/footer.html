@@ -64,7 +64,7 @@
                 {{- if ne .Site.Params.footer.hugo false -}}
                 {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="noopener noreffer"
                     title="Hugo %v">Hugo</a>` hugo.Version -}}
-                {{- $theme := `<a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>` -}}
+                {{- $theme := `<a href="https://github.com/hydrz/hugo-theme-github" target="_blank" rel="noopener noreffer" title="hugo-theme-github"><i class="far fa-kiss-wink-heart fa-fw"></i> Github</a>` -}}
                 {{- dict "Hugo" $hugo "Theme" $theme | T "poweredBySome" | safeHTML }}
                 {{- end -}}
             </li>
