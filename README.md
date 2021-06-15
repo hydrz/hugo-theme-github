@@ -1,28 +1,20 @@
-# LoveIt Theme | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
+# hugo-theme-github [![github pages](https://github.com/hydrz/hugo-theme-github/actions/workflows/gh-pages.yml/badge.svg?branch=github)](https://github.com/hydrz/hugo-theme-github/actions/workflows/gh-pages.yml)
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
-[![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
-[![CircleCI](https://img.shields.io/circleci/build/github/dillonzq/LoveIt/develop?label=CI&style=flat-square&logo=circleci)](https://app.circleci.com/pipelines/github/dillonzq/LoveIt)
+[![License](https://img.shields.io/github/license/hydrz/hugo-theme-github?style=flat-square)](https://github.com/hydrz/hugo-theme-github/blob/master/LICENSE)
 
-English README | [简体中文说明](https://github.com/dillonzq/LoveIt/blob/master/README.zh-cn.md)
+English README | [简体中文说明](https://github.com/hydrz/hugo-theme-github/blob/master/README.zh-cn.md)
 
-> **LoveIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
+> **hugo-theme-github** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
-It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt) and [KeepIt Theme](https://github.com/Fastbyte01/KeepIt).
+It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt) and [github-style Theme](https://github.com/MeiK2333/github-style).
 
-Since the three themes have a similar look, if you have questions about their differences,
-read [Why choose LoveIt](#why-choose-loveit) so that you can choose the one that works best for you.
+![hugo-theme-github](images/preview.png)
 
-![Hugo Theme LoveIt](https://github.com/dillonzq/LoveIt/raw/master/images/Apple-Devices-Preview.png)
+## [Demo Site](https://hugo-theme-github.dipp.ink/)
 
-## [Demo Site](https://hugoloveit.com/)
-
-To see this theme in action, here is a live [demo site](https://hugoloveit.com/) which is rendered with **LoveIt** theme.
-
-## Why choose LoveIt
-
-Compared to the original LeaveIt theme and the KeepIt theme, the LoveIt theme has the following modifications.
+To see this theme in action, here is a live [demo site](https://hugo-theme-github.dipp.ink/) which is rendered with **hugo-theme-github** theme.
+## Features
 
 * Custom **Header**
 * Custom **CSS Style**
@@ -47,16 +39,6 @@ Compared to the original LeaveIt theme and the KeepIt theme, the LoveIt theme ha
 * Custom style shortcodes supported
 * **CDN** for all third-party libraries supported
 * ...
-
-In short,
-if you prefer the design language and freedom of the LoveIt theme,
-if you want to use the extended Font Awesome icons conveniently,
-if you want to embed mathematical formulas, flowcharts, music or Bilibili videos in your posts,
-the LoveIt theme may be more suitable for you.
-
-I hope you will LoveIt ❤️!
-
-## Features
 
 ### Performance and SEO
 
@@ -116,43 +98,29 @@ I hope you will LoveIt ❤️!
 * **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
 * ...
 
-## [Documentation](https://hugoloveit.com/categories/documentation/)
+## [Documentation](https://hugo-theme-github.dipp.ink/categories/documentation/)
 
 Build Documentation Locally:
 
 ```bash
-hugo server --source=exampleSite
+# For Hugo Pipes to process JS files with Babel, see https://gohugo.io/hugo-pipes/babel/
+npm install -g @babel/cli @babel/core
+# For import github style sass file, see https://primer.style/css/
+npm install 
+# Run hugo server
+hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender -e production
 ```
 
 ## Multilingual and i18n
 
-LoveIt supports the following languages:
+hugo-theme-github supports the following languages:
 
 * English
 * Simplified Chinese
-* French
-* Polish
-* Brazilian Portuguese
-* Italian
-* Spanish
-* German
-* Serbian
-* Russian
-* Romanian
-* Vietnamese
-* [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
-
-[Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)
-
-## [Roadmap](https://github.com/dillonzq/LoveIt/projects/1)
-
-## Questions, ideas, bugs, pull requests
-
-All feedback is welcome! Head over to the [issue tracker](https://github.com/dillonzq/LoveIt/issues).
 
 ## License
 
-LoveIt is licensed under the **MIT** license. Check the [LICENSE file](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) for details.
+hugo-theme-github is licensed under the **MIT** license. Check the [LICENSE file](https://github.com/hydrz/hugo-theme-github/blob/master/LICENSE) for details.
 
 Thanks to the authors of following resources included in the theme:
 
@@ -180,17 +148,3 @@ Thanks to the authors of following resources included in the theme:
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
 * [cookieconsent](https://github.com/osano/cookieconsent)
-
-## Author
-
-[Dillon](https://dillonzq.com)
-
-## Sponsor
-
-If you enjoy the theme, please consider buying me a coffee ☕️.
-
-* [PayPal](https://paypal.me/dillonzq)
-* [Alipay](https://github.com/dillonzq/LoveIt/raw/master/images/Alipay.jpg)
-* [Wechat](https://github.com/dillonzq/LoveIt/raw/master/images/Wechat.jpg)
-
-Thanks! ❤️
