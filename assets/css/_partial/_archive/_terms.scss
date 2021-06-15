@@ -57,24 +57,12 @@
     color: $global-link-hover-color;
     background-color: transparent;
   }
-
-  [theme=dark] & {
-    color: $global-link-color-dark;
-
-    &:hover {
-      color: $global-link-hover-color-dark;
-    }
-  }
 }
 
 .archive-item-date {
   width: 4em;
   text-align: right;
   color: $global-font-secondary-color;
-
-  [theme=dark] & {
-    color: $global-font-secondary-color-dark;
-  }
 }
 
 .more-post {

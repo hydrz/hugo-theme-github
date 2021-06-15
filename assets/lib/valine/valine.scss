@@ -42,10 +42,6 @@ $code-background-color-dark: #272C34 !default;
   .vcards .vcard .vquote,
   blockquote {
     border-color: $border-color;
-
-    [theme=dark] & {
-      border-color: $border-color-dark;
-    }
   }
 
   code, pre, pre code {
@@ -55,11 +51,6 @@ $code-background-color-dark: #272C34 !default;
     @include tab-size(4);
     color: $code-color;
     background: $code-background-color;
-
-    [theme=dark] & {
-      color: $code-color-dark;
-      background: $code-background-color-dark;
-    }
   }
 
   .emoji, .vemoji {

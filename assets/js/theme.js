@@ -32,7 +32,7 @@ class Theme {
     constructor() {
         this.config = window.config;
         this.data = this.config.data;
-        this.isDark = document.body.getAttribute('theme') === 'dark';
+        this.isDark = document.body.getAttribute('data-color-mode') === 'dark';
         this.util = new Util();
         this.newScrollTop = this.util.getScrollTop();
         this.oldScrollTop = this.newScrollTop;
@@ -83,8 +83,8 @@ class Theme {
     initSwitchTheme() {
         this.util.forEach(document.getElementsByClassName('theme-switch'), $themeSwitch => {
             $themeSwitch.addEventListener('click', () => {
-                if (document.body.getAttribute('theme') === 'dark') document.body.setAttribute('theme', 'light');
-                else document.body.setAttribute('theme', 'dark');
+                if (document.body.getAttribute('data-color-mode') === 'dark') document.body.setAttribute('data-color-mode', 'light');
+                else document.body.setAttribute('data-color-mode', 'dark');
                 this.isDark = !this.isDark;
                 window.localStorage && localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
                 for (let event of this.switchThemeEventSet) event();
@@ -94,85 +94,45 @@ class Theme {
 
     initSearch() {
         const searchConfig = this.config.search;
-        const isMobile = this.util.isMobile();
-        if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
+        if (!searchConfig || this._searchOnce) return;
 
         const maxResultLength = searchConfig.maxResultLength ? searchConfig.maxResultLength : 10;
         const snippetLength = searchConfig.snippetLength ? searchConfig.snippetLength : 50;
         const highlightTag = searchConfig.highlightTag ? searchConfig.highlightTag : 'em';
 
-        const suffix = isMobile ? 'mobile' : 'desktop';
-        const $header = document.getElementById(`header-${suffix}`);
-        const $searchInput = document.getElementById(`search-input-${suffix}`);
-        const $searchToggle = document.getElementById(`search-toggle-${suffix}`);
-        const $searchLoading = document.getElementById(`search-loading-${suffix}`);
-        const $searchClear = document.getElementById(`search-clear-${suffix}`);
-        if (isMobile) {
-            this._searchMobileOnce = true;
-            $searchInput.addEventListener('focus', () => {
-                document.body.classList.add('blur');
-                $header.classList.add('open');
-            }, false);
-            document.getElementById('search-cancel-mobile').addEventListener('click', () => {
-                $header.classList.remove('open');
-                document.body.classList.remove('blur');
-                document.getElementById('menu-toggle-mobile').classList.remove('active');
-                document.getElementById('menu-mobile').classList.remove('active');
-                $searchLoading.style.display = 'none';
-                $searchClear.style.display = 'none';
-                this._searchMobile && this._searchMobile.autocomplete.setVal('');
-            }, false);
-            $searchClear.addEventListener('click', () => {
-                $searchClear.style.display = 'none';
-                this._searchMobile && this._searchMobile.autocomplete.setVal('');
-            }, false);
-            this._searchMobileOnClickMask = this._searchMobileOnClickMask || (() => {
-                $header.classList.remove('open');
-                $searchLoading.style.display = 'none';
-                $searchClear.style.display = 'none';
-                this._searchMobile && this._searchMobile.autocomplete.setVal('');
-            });
-            this.clickMaskEventSet.add(this._searchMobileOnClickMask);
-        } else {
-            this._searchDesktopOnce = true;
-            $searchToggle.addEventListener('click', () => {
-                document.body.classList.add('blur');
-                $header.classList.add('open');
-                $searchInput.focus();
-            }, false);
-            $searchClear.addEventListener('click', () => {
-                $searchClear.style.display = 'none';
-                this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
-            }, false);
-            this._searchDesktopOnClickMask = this._searchDesktopOnClickMask || (() => {
-                $header.classList.remove('open');
-                $searchLoading.style.display = 'none';
-                $searchClear.style.display = 'none';
-                this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
-            });
-            this.clickMaskEventSet.add(this._searchDesktopOnClickMask);
-        }
-        $searchInput.addEventListener('input', () => {
-            if ($searchInput.value === '') $searchClear.style.display = 'none';
-            else $searchClear.style.display = 'inline';
-        }, false);
+        const $searchInput = document.getElementById(`search-input`);
+
+        $searchInput.addEventListener('focus', () => {
+            $searchInput.classList.add("jump-to-field-active");
+            $searchInput.classList.add("jump-to-dropdown-visible");
+            document.getElementById(`header-search-key-slash`).classList.add("d-none");
+            document.getElementById(`jump-to-suggestions`).classList.remove("d-none");
+        })
+
+        $searchInput.addEventListener('blur', () => {
+            $searchInput.classList.remove("jump-to-field-active");
+            document.getElementById(`header-search-key-slash`).classList.remove("d-none");
+            document.getElementById(`jump-to-suggestions`).classList.add("d-none");
+        })
+
+        this._searchOnce = true;
+        this._searchOnClickMask = this._searchOnClickMask || (() => {
+            this._search && this._search.autocomplete.setVal('');
+        });
+        this.clickMaskEventSet.add(this._searchOnClickMask);
 
         const initAutosearch = () => {
-            const autosearch = autocomplete(`#search-input-${suffix}`, {
+            const autosearch = autocomplete(`#search-input`, {
                 hint: false,
                 autoselect: true,
-                dropdownMenuContainer: `#search-dropdown-${suffix}`,
+                dropdownMenuContainer: `#jump-to-suggestions`,
                 clearOnSelected: true,
                 cssClasses: { noPrefix: true },
                 debug: true,
             }, {
                 name: 'search',
                 source: (query, callback) => {
-                    $searchLoading.style.display = 'inline';
-                    $searchClear.style.display = 'none';
                     const finish = (results) => {
-                        $searchLoading.style.display = 'none';
-                        $searchClear.style.display = 'inline';
                         callback(results);
                     };
                     if (searchConfig.type === 'lunr') {
@@ -203,9 +163,9 @@ class Theme {
                                 });
                                 results[uri] = {
                                     'uri': uri,
-                                    'title' : title,
-                                    'date' : matchData.date,
-                                    'context' : context,
+                                    'title': title,
+                                    'date': matchData.date,
+                                    'context': context,
                                 };
                             });
                             return Object.values(results).slice(0, maxResultLength);
@@ -266,26 +226,28 @@ class Theme {
                     }
                 },
                 templates: {
-                    suggestion: ({ title, date, context }) => `<div><span class="suggestion-title">${title}</span><span class="suggestion-date">${date}</span></div><div class="suggestion-context">${context}</div>`,
+                    suggestion: ({ title, date, context }) => `<div class="suggestion-row"><span class="suggestion-title">${title}</span><span class="suggestion-date">${date}</span></div><div class="suggestion-context">${context}</div>`,
                     empty: ({ query }) => `<div class="search-empty">${searchConfig.noResultsFound}: <span class="search-query">"${query}"</span></div>`,
-                    footer: ({}) => {
-                        const { searchType, icon, href } = searchConfig.type === 'algolia' ? {
-                            searchType: 'algolia',
-                            icon: '<i class="fab fa-algolia fa-fw"></i>',
-                            href: 'https://www.algolia.com/',
-                        } : {
-                            searchType: 'Lunr.js',
-                            icon: '',
-                            href: 'https://lunrjs.com/',
-                        };
-                        return `<div class="search-footer">Search by <a href="${href}" rel="noopener noreffer" target="_blank">${icon} ${searchType}</a></div>`;},
+                    // footer: ({ }) => {
+                    //     const { searchType, icon, href } = searchConfig.type === 'algolia' ? {
+                    //         searchType: 'algolia',
+                    //         icon: '<i class="fab fa-algolia fa-fw"></i>',
+                    //         href: 'https://www.algolia.com/',
+                    //     } : {
+                    //         searchType: 'Lunr.js',
+                    //         icon: '',
+                    //         href: 'https://lunrjs.com/',
+                    //     };
+                    //     return `<div class="search-footer">Search by <a href="${href}" rel="noopener noreffer" target="_blank">${icon} ${searchType}</a></div>`;
+                    // },
                 },
             });
+
             autosearch.on('autocomplete:selected', (_event, suggestion, _dataset, _context) => {
                 window.location.assign(suggestion.uri);
             });
-            if (isMobile) this._searchMobile = autosearch;
-            else this._searchDesktop = autosearch;
+
+            this._search = autosearch;
         };
         if (searchConfig.lunrSegmentitURL && !document.getElementById('lunr-segmentit')) {
             const script = document.createElement('script');
@@ -295,7 +257,7 @@ class Theme {
             script.async = true;
             if (script.readyState) {
                 script.onreadystatechange = () => {
-                    if (script.readyState == 'loaded' || script.readyState == 'complete'){
+                    if (script.readyState == 'loaded' || script.readyState == 'complete') {
                         script.onreadystatechange = null;
                         initAutosearch();
                     }
@@ -311,10 +273,13 @@ class Theme {
 
     initDetails() {
         this.util.forEach(document.getElementsByClassName('details'), $details => {
-            const $summary = $details.getElementsByClassName('details-summary')[0];
-            $summary.addEventListener('click', () => {
-                $details.classList.toggle('open');
-            }, false);
+            const $summaries = $details.getElementsByClassName('details-summary');
+            for (let index = 0; index < $summaries.length; index++) {
+                const $summary = $summaries[index];
+                $summary.addEventListener('click', () => {
+                    $details.classList.toggle('open');
+                }, false);
+            }
         });
     }
 
@@ -397,73 +362,44 @@ class Theme {
     initToc() {
         const $tocCore = document.getElementById('TableOfContents');
         if ($tocCore === null) return;
+        $tocCore.removeAttribute("id");
+
         if (document.getElementById('toc-static').getAttribute('kept') || this.util.isTocStatic()) {
             const $tocContentStatic = document.getElementById('toc-content-static');
-            if ($tocCore.parentElement !== $tocContentStatic) {
-                $tocCore.parentElement.removeChild($tocCore);
-                $tocContentStatic.appendChild($tocCore);
-            }
-            if (this._tocOnScroll) this.scrollEventSet.delete(this._tocOnScroll);
-        } else {
-            const $tocContentAuto = document.getElementById('toc-content-auto');
-            if ($tocCore.parentElement !== $tocContentAuto) {
-                $tocCore.parentElement.removeChild($tocCore);
-                $tocContentAuto.appendChild($tocCore);
-            }
-            const $toc = document.getElementById('toc-auto');
-            const $page = document.getElementsByClassName('page')[0];
-            const rect = $page.getBoundingClientRect();
-            $toc.style.left = `${rect.left + rect.width + 20}px`;
-            $toc.style.maxWidth = `${$page.getBoundingClientRect().left - 20}px`;
-            $toc.style.visibility = 'visible';
-            const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
-            const $tocLiElements = $tocCore.getElementsByTagName('li');
-            const $headerLinkElements = document.getElementsByClassName('headerLink');
-            const headerIsFixed = document.body.getAttribute('header-desktop') !== 'normal';
-            const headerHeight = document.getElementById('header-desktop').offsetHeight;
-            const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
-            const minTocTop = $toc.offsetTop;
-            const minScrollTop = minTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
-            this._tocOnScroll = this._tocOnScroll || (() => {
-                const footerTop = document.getElementById('post-footer').offsetTop;
-                const maxTocTop = footerTop - $toc.getBoundingClientRect().height;
-                const maxScrollTop = maxTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
-                if (this.newScrollTop < minScrollTop) {
-                    $toc.style.position = 'absolute';
-                    $toc.style.top = `${minTocTop}px`;
-                } else if (this.newScrollTop > maxScrollTop) {
-                    $toc.style.position = 'absolute';
-                    $toc.style.top = `${maxTocTop}px`;
-                } else {
-                    $toc.style.position = 'fixed';
-                    $toc.style.top = `${TOP_SPACING}px`;
-                }
-
-                this.util.forEach($tocLinkElements, $tocLink => { $tocLink.classList.remove('active'); });
-                this.util.forEach($tocLiElements, $tocLi => { $tocLi.classList.remove('has-active'); });
-                const INDEX_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
-                let activeTocIndex = $headerLinkElements.length - 1;
-                for (let i = 0; i < $headerLinkElements.length - 1; i++) {
-                    const thisTop = $headerLinkElements[i].getBoundingClientRect().top;
-                    const nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
-                    if ((i == 0 && thisTop > INDEX_SPACING)
-                     || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
-                        activeTocIndex = i;
-                        break;
-                    }
-                }
-                if (activeTocIndex !== -1) {
-                    $tocLinkElements[activeTocIndex].classList.add('active');
-                    let $parent = $tocLinkElements[activeTocIndex].parentElement;
-                    while ($parent !== $tocCore) {
-                        $parent.classList.add('has-active');
-                        $parent = $parent.parentElement.parentElement;
-                    }
-                }
-            });
-            this._tocOnScroll();
-            this.scrollEventSet.add(this._tocOnScroll);
+            $tocContentStatic.appendChild($tocCore.cloneNode(true));
         }
+
+        const $tocContentAuto = document.getElementById('toc-content-auto');
+        $tocContentAuto.appendChild($tocCore.cloneNode(true));
+
+        const $tocLinkElements = $tocCore.querySelectorAll('a');
+        const $headerLinkElements = document.getElementsByClassName('headerLink');
+
+        this._tocOnScroll = this._tocOnScroll || (() => {
+            this.util.forEach($tocLinkElements, $tocLink => { $tocLink.classList.remove('active'); });
+            const INDEX_SPACING = 120;
+            let activeTocIndex = $headerLinkElements.length - 1;
+            for (let i = 0; i < $headerLinkElements.length - 1; i++) {
+                const thisTop = $headerLinkElements[i].getBoundingClientRect().top;
+                const nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
+                if ((i == 0 && thisTop > INDEX_SPACING)
+                    || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
+                    activeTocIndex = i;
+                    break;
+                }
+            }
+            if (activeTocIndex !== -1) {
+                $tocLinkElements[activeTocIndex].classList.add('active');
+                let $parent = $tocLinkElements[activeTocIndex].parentElement;
+                while ($parent !== $tocCore) {
+                    $parent.classList.add('has-active');
+                    $parent = $parent.parentElement.parentElement;
+                }
+            }
+        });
+        this._tocOnScroll();
+        this.scrollEventSet.add(this._tocOnScroll);
+
     }
 
     initMath() {
@@ -473,7 +409,7 @@ class Theme {
     initMermaid() {
         const $mermaidElements = document.getElementsByClassName('mermaid');
         if ($mermaidElements.length) {
-            mermaid.initialize({startOnLoad: false, theme: 'null'});
+            mermaid.initialize({ startOnLoad: false, theme: 'null' });
             this.util.forEach($mermaidElements, $mermaid => {
                 mermaid.mermaidAPI.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
                     $mermaid.insertAdjacentHTML('afterbegin', svgCode);
@@ -490,7 +426,7 @@ class Theme {
             }
             this._echartsArr = [];
             this.util.forEach(document.getElementsByClassName('echarts'), $echarts => {
-                const chart = echarts.init($echarts, this.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
+                const chart = echarts.init($echarts, this.isDark ? 'dark' : 'macarons', { renderer: 'svg' });
                 chart.setOption(JSON.parse(this.data[$echarts.id]));
                 this._echartsArr.push(chart);
             });
@@ -700,7 +636,7 @@ class Theme {
         try {
             this.initSVGIcon();
             this.initTwemoji();
-            this.initMenuMobile();
+            // this.initMenuMobile();
             this.initSwitchTheme();
             this.initSearch();
             this.initDetails();

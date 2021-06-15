@@ -1,57 +1,77 @@
-{{- define "title" -}}
+{{- define "title" }}
     {{- .Params.Title | default (T .Data.Plural) | default .Data.Plural | dict "Some" | T "allSome" }} - {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}
-    {{- $taxonomies := .Data.Plural -}}
-    {{- $terms := .Data.Terms.ByCount -}}
-    {{- $type := .Type -}}
+{{- $profile := .Site.Params.home.profile -}}
 
-    <div class="page archive">
-        {{- /* Title */ -}}
-        <h2 class="single-title animated pulse faster">
-            {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" -}}
-        </h2>
+{{- partial "home/nav.html" . -}}
 
-        {{- /* Categories Page */ -}}
-        {{- if eq $taxonomies "categories" -}}
-            <div class="categories-card">
-                {{- range $terms -}}
-                    {{- $term := .Term -}}
-                    {{- $pages := .Pages -}}
-                    {{- with $.Site.GetPage "taxonomy" (printf "%v/%v" $type $term) -}}
-                    <div class="card-item">
-                        <div class="card-item-wrapper">
-                            <h3 class="card-item-title">
-                                <a href="{{ .RelPermalink }}">
-                                    <i class="far fa-folder fa-fw"></i>&nbsp;{{ .Page.Title }}
-                                </a>
-                            </h3>
-                            {{- range first 5 $pages -}}
-                                <article class="archive-item">
-                                    <a href="{{ .RelPermalink }}" class="archive-item-link">
-                                        {{- .Title -}}
-                                    </a>
-                                </article>
+<div class="container-xl px-3 px-md-4 px-lg-5">
+    <div  class="gutter-condensed gutter-lg flex-column flex-md-row d-flex">
+        <div  class="flex-shrink-0 col-12 col-md-3 mb-4 mb-md-0">
+            {{- /* Profile */ -}}
+            {{- if ne $profile.enable false -}}
+            {{- partial "home/profile.html" . -}}
+            {{- end -}}
+        </div>
+
+        <div  class="flex-shrink-0 col-12 col-md-9 mb-4 mb-md-0 mt-5">
+            {{- $taxonomies := .Data.Plural -}}
+            {{- $terms := .Data.Terms.ByCount -}}
+            {{- $type := .Type -}}
+        
+            <div class="page archive">
+                {{- /* Title */ -}}
+                <h2 class="single-title animated pulse faster mb-5">
+                    {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" -}}
+                </h2>
+
+                {{- /* Categories Page */ -}}
+                {{- if eq $taxonomies "categories" -}}
+                    <div class="categories-card">
+                        {{- range $terms -}}
+                            {{- $term := .Term -}}
+                            {{- $pages := .Pages -}}
+                            {{- with $.Site.GetPage "taxonomy" (printf "%v/%v" $type $term) -}}
+                            <div class="card-item">
+                                <div class="card-item-wrapper">
+                                    <h3 class="card-item-title">
+                                        <a href="{{ .RelPermalink }}">
+                                            <i class="far fa-folder fa-fw"></i>&nbsp;{{ .Page.Title }}
+                                        </a>
+                                    </h3>
+                                    {{- range first 5 $pages -}}
+                                        <article class="archive-item">
+                                            <a href="{{ .RelPermalink }}" class="archive-item-link">
+                                                {{- .Title -}}
+                                            </a>
+                                        </article>
+                                    {{- end -}}
+                                    {{- if gt (len $pages) 5 -}}
+                                        <span class="more-post">
+                                            <a href="{{ .RelPermalink }}" class="more-single-link">{{ T "more" }} >></a>
+                                        </span>
+                                    {{- end -}}
+                                </div>
+                            </div>
                             {{- end -}}
-                            {{- if gt (len $pages) 5 -}}
-                                <span class="more-post">
-                                    <a href="{{ .RelPermalink }}" class="more-single-link">{{ T "more" }} >></a>
-                                </span>
-                            {{- end -}}
-                        </div>
+                        {{- end -}}
                     </div>
-                    {{- end -}}
+        
+                {{- /* Tag Cloud Page */ -}}
+                {{- else if eq $taxonomies "tags" -}}
+                    <div class="tag-cloud-tags">
+                        {{- range $.Site.Taxonomies.tags.ByCount -}}
+                            <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <sup>{{ .Count }}</sup></a>
+                        {{- end -}}
+                    </div>
                 {{- end -}}
             </div>
-
-        {{- /* Tag Cloud Page */ -}}
-        {{- else if eq $taxonomies "tags" -}}
-            <div class="tag-cloud-tags">
-                {{- range $.Site.Taxonomies.tags.ByCount -}}
-                    <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <sup>{{ .Count }}</sup></a>
-                {{- end -}}
-            </div>
-        {{- end -}}
+        </div>
     </div>
+</div>
+
+<div id="svg-tip" class="svg-tip svg-tip-one-line" style="pointer-events: none; display: none;">
+</div>
 {{- end -}}

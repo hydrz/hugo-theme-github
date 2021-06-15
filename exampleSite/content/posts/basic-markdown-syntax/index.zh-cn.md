@@ -4,17 +4,26 @@ title: "Markdown 基本语法"
 date: 2019-12-01T21:57:40+08:00
 lastmod: 2020-01-01T16:45:40+08:00
 draft: false
-author: "Dillon"
-authorLink: "https://dillonzq.com"
+author: ""
+authorLink: ""
 description: "这篇文章展示了基本的 Markdown 语法和格式."
-resources:
-- name: "featured-image"
-  src: "featured-image.png"
+forkedFrom: "https://dillonzq.com"
 
 tags: ["Markdown", "HTML"]
 categories: ["Markdown"]
 
-lightgallery: true
+hiddenFromHomePage: false
+hiddenFromSearch: false
+
+featuredImage: "featured-image.png"
+featuredImagePreview: ""
+
+toc:
+  enable: true
+math:
+  enable: false
+lightgallery: false
+license: ""
 ---
 
 这篇文章提供了可以在 Hugo 的文章中使用的基本 Markdown 语法示例.

@@ -1,41 +1,140 @@
 {{- define "content" -}}
-    {{- $params := .Scratch.Get "params" -}}
-    {{- $profile := .Site.Params.home.profile -}}
-    {{- $posts := .Site.Params.home.posts -}}
+{{- $params := .Scratch.Get "params" -}}
+{{- $profile := .Site.Params.home.profile -}}
+{{- $posts := .Site.Params.home.posts -}}
 
-    <div class="page home"{{ if ne $posts.enable false }} posts{{ end }}>
-        {{- /* Profile */ -}}
-        {{- if ne $profile.enable false -}}
-            {{- partial "home/profile.html" . -}}
-        {{- end -}}
+{{- partial "home/nav.html" . -}}
 
-        {{- /* Content */ -}}
-        {{- if .Content -}}
-            <div class="single">
-                <div class="content" id="content">
-                    {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
-                </div>
-            </div>
-        {{- end -}}
-
-        {{- /* Posts */ -}}
-        {{- if ne $posts.enable false | and .Site.RegularPages -}}
-            {{- /* Paginate */ -}}
-            {{- $pages := where .Site.RegularPages "Type" "posts" -}}
-            {{- if .Site.Params.page.hiddenFromHomePage -}}
-                {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
-            {{- else -}}
-                {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
-            {{- end -}}
-            {{- with $posts.paginate | default .Site.Params.paginate -}}
-                {{- $pages = $.Paginate $pages . -}}
-            {{- else -}}
-                {{- $pages = .Paginate $pages -}}
-            {{- end -}}
-            {{- range $pages.Pages -}}
-                {{- .Render "summary" -}}
-            {{- end -}}
-            {{- partial "paginator.html" . -}}
-        {{- end -}}
+<div class="container-xl px-3 px-md-4 px-lg-5">
+  <div class="gutter-condensed gutter-lg flex-column flex-md-row d-flex">
+    <div class="flex-shrink-0 col-12 col-md-3 mb-4 mb-md-0">
+      {{- /* Profile */ -}}
+      {{- if ne $profile.enable false -}}
+      {{- partial "home/profile.html" . -}}
+      {{- end -}}
     </div>
-{{- end -}}
+
+    <div class="flex-shrink-0 col-12 col-md-9 mb-4 mb-md-0">
+      {{- /* Content */ -}}
+      {{- if .Content -}}
+      <div class="single">
+        <div class="content" id="content">
+          {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome"  $params.fontawesome | partial "function/content.html" | safeHTML -}}
+        </div>
+      </div>
+      {{- end -}}
+
+      <div class="position-relative">
+        <div class="mt-4">
+          <div class="js-pinned-items-reorder-container">
+            <h2 class="f4 mb-2 text-normal">
+              Popular posts
+              <svg style="box-sizing: content-box; color: var(--color-icon-primary);" viewBox="0 0 16 16" fill="none" width="16" height="16" class="spinner pinned-items-spinner js-pinned-items-spinner v-align-text-bottom ml-1 anim-rotate">
+                <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-opacity="0.25" stroke-width="2" vector-effect="non-scaling-stroke"></circle>
+                <path d="M15 8a7.002 7.002 0 00-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+              </svg>
+              <span class="ml-2 color-text-secondary f6 js-pinned-items-reorder-message" role="status" aria-live="polite"></span>
+            </h2>
+            <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4">
+              {{- /* Posts */ -}}
+              {{- if ne $posts.enable false | and .Site.RegularPages -}}
+              {{- /* Paginate */ -}}
+              {{- $pages := where .Site.RegularPages "Type" "posts" -}}
+              {{- if .Site.Params.page.hiddenFromHomePage -}}
+              {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
+              {{- else -}}
+              {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
+              {{- end -}}
+              {{- with $posts.paginate | default .Site.Params.paginate -}}
+              {{- $pages = $.Paginate $pages . -}}
+              {{- else -}}
+              {{- $pages = .Paginate $pages -}}
+              {{- end -}}
+              {{- range $pages.Pages -}}
+              {{- .Render "summary" -}}
+              {{- end -}}
+              {{- partial "paginator.html" . -}}
+              {{- end -}}
+            </ol>
+          </div>
+        </div>
+
+        <div class="mt-4 position-relative">
+          {{ $section := where .Site.RegularPages "Type" "posts" }}
+          <div class="mt-4 position-relative" id="contributions" data='[
+                        {{ range $index, $elem := $section }}
+                            {
+                            "title": "{{ .Title }}",
+                            "link": "{{ .Permalink }}",
+                            "publishDate": "{{ .PublishDate.Format "2006-01-02 15:04:05" }}"
+                            }
+                        {{ if ne $index (sub (len $section) 1) }},{{ end }}
+                        {{ end }}
+                    ]'>
+
+            <div class="js-yearly-contributions">
+              <div class="position-relative">
+                <h2 class="f4 text-normal mb-2" id="posts-count"></h2>
+                <div class="border py-2 graph-before-activity-overview">
+                  <div class="js-calendar-graph mx-md-2 mx-3 d-flex flex-column flex-items-end flex-xl-items-center overflow-hidden pt-1 is-graph-loading graph-canvas ContributionCalendar height-full text-center">
+                    <svg width="828" height="128" class="js-calendar-graph-svg">
+                      <g transform="translate(10, 20)" id="graph-svg">
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="width-full f6 px-0 px-md-5 py-1 mb-3">
+                    <div class="float-left">
+                    </div>
+                    <div class="float-right color-text-secondary" title="A summary of pull requests, issues opened, and commits to the default and gh-pages branches.">
+                      Less
+                      <svg width="10" height="10" class="d-inline-block">
+                        <rect width="10" height="10" class="ContributionCalendar-day" rx="2" ry="2" data-level="0"></rect>
+                      </svg>
+                      <svg width="10" height="10" class="d-inline-block">
+                        <rect width="10" height="10" class="ContributionCalendar-day" rx="2" ry="2" data-level="1"></rect>
+                      </svg>
+                      <svg width="10" height="10" class="d-inline-block">
+                        <rect width="10" height="10" class="ContributionCalendar-day" rx="2" ry="2" data-level="2"></rect>
+                      </svg>
+                      <svg width="10" height="10" class="d-inline-block">
+                        <rect width="10" height="10" class="ContributionCalendar-day" rx="2" ry="2" data-level="3"></rect>
+                      </svg>
+                      <svg width="10" height="10" class="d-inline-block">
+                        <rect width="10" height="10" class="ContributionCalendar-day" rx="2" ry="2" data-level="4"></rect>
+                      </svg>
+                      More
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="activity-listing contribution-activity">
+              <div class="d-none d-lg-block">
+                <div class="js-profile-timeline-year-list bg-white float-right col-2 pl-5 is-placeholder" style="visibility: hidden; display: none; height: 210px;"></div>
+                <div style="top: 74px; position: static;" class="js-profile-timeline-year-list bg-white js-sticky float-right col-2 pl-5">
+                  <ul class="filter-list small" id="year-list">
+                  </ul>
+                </div>
+              </div>
+
+
+              <h2 class="f4 text-normal mt-4 mb-3">
+                Post activity
+              </h2>
+
+              <div id="posts-activity">
+              </div>
+            </div>
+
+          </div>
+
+          <div id="pinned-items-modal-wrapper"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="svg-tip" class="svg-tip svg-tip-one-line" style="pointer-events: none; display: none;">
+  </div>
+  {{- end -}}
