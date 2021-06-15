@@ -1,7 +1,7 @@
 {
-  "name": "loveit-src",
+  "name": "hugo-theme-github-src",
   "version": "0.2.0",
-  "description": "LoveIt theme source file",
+  "description": "hugo-theme-github theme source file",
   "private": true,
   "devDependencies": {
     "@babel/cli": "^7.14.5",
@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dillonzq/LoveIt.git"
+    "url": "git+https://github.com/hydrz/hugo-theme-github.git"
   },
   "keywords": [
     "hugo",
@@ -43,7 +43,7 @@
   "author": "Dillon",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dillonzq/LoveIt/issues"
+    "url": "https://github.com/hydrz/hugo-theme-github/issues"
   },
-  "homepage": "https://github.com/dillonzq/LoveIt#readme"
+  "homepage": "https://github.com/hydrz/hugo-theme-github#readme"
 }
