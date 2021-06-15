@@ -125,10 +125,6 @@ Example `instagram` input:
 {{</* instagram BWNjjyYFxVx hidecaption */>}}
 ```
 
-The rendered output looks like this:
-
-{{< instagram BWNjjyYFxVx hidecaption >}}
-
 ## 5 param
 
 [Documentation of `param`](https://gohugo.io/content-management/shortcodes#param)
