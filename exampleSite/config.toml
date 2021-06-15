@@ -1,4 +1,4 @@
-baseURL = "https://hydrz.github.io/LoveIt/"
+baseURL = "https://hugo-theme-github.dipp.ink"
 # [en, zh-cn, fr, pl, ...] determines default content language
 # [en, zh-cn, fr, pl, ...] 设置默认的语言
 defaultContentLanguage = "en"
@@ -28,7 +28,7 @@ enableEmoji = true
 [author]
 name = "xxxx"
 email = "xxxx@xxxx.com"
-link = "https://hydrz.github.io/LoveIt/"
+link = "https://hugo-theme-github.dipp.ink"
 
 [menu]
   [[menu.main]]
