@@ -2,7 +2,7 @@
 
 {{- $avatar := $profile.avatarURL -}}
 {{- with $profile.gravatarEmail -}}
-{{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%v?s=240&d=mp" -}}
+{{- $avatar = md5 . | printf "https://cdn.v2ex.com/gravatar/%v?s=240&d=mp" -}}
 {{- end -}}
 
 <div class="mt-4 position-sticky top-0 d-none d-md-block color-bg-primary width-full border-bottom

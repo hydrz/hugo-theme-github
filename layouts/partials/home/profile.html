@@ -6,7 +6,7 @@
     <div class="position-relative d-inline-block col-2 col-md-12 mr-3 mr-md-0 flex-shrink-0" style="z-index: 4">
       {{- $avatar := $profile.avatarURL -}}
       {{- with $profile.gravatarEmail -}}
-      {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%v?s=240&d=mp" -}}
+      {{- $avatar = md5 . | printf "https://cdn.v2ex.com/gravatar/%v?s=240&d=mp" -}}
       {{- end -}}
 
       {{- if $avatar -}}

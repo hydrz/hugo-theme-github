@@ -69,7 +69,7 @@
                     {{- $profile := .Site.Params.home.profile -}}
                     {{- $avatar := $profile.avatarURL -}}
                     {{- with $profile.gravatarEmail -}}
-                    {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%v?s=240&d=mp" -}}
+                    {{- $avatar = md5 . | printf "https://cdn.v2ex.com/gravatar/%v?s=240&d=mp" -}}
                     {{- end -}}
                     {{- $author := $params.author | default .Site.Author.name | default (T "author") -}}
                     {{- $authorLink := $params.authorlink | default .Site.Author.link | default .Site.Home.RelPermalink -}}
