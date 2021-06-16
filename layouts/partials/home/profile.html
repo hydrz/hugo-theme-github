@@ -23,6 +23,7 @@
       <img style="height: auto" alt="" width="260" height="260" class="avatar avatar-user width-full border color-bg-primary" src="{{$avatar}}" />
       {{- end -}}
 
+      {{ with $profile.statusEmoji }}
       <div class="user-status-container position-relative hide-sm hide-md">
         <div class="f5 js-user-status-context user-status-circle-badge-container">
           <div class="js-user-status-container user-status-circle-badge d-inline-block lh-condensed-ultra p-2">
@@ -31,14 +32,14 @@
                 <div class="f6 lh-condensed user-status-header d-inline-flex user-status-emoji-only-header circle">
                   <div class="user-status-emoji-container flex-shrink-0 mr-2 d-flex flex-items-center flex-justify-center">
                     <div>
-                      <g-emoji class="g-emoji" alias="milky_way"> 🌌</g-emoji>
+                      <g-emoji class="g-emoji" alias="milky_way"> {{ . }}</g-emoji>
                     </div>
                   </div>
                 </div>
                 <div class="ws-normal user-status-message-wrapper f6 min-width-0">
                   <div class="css-truncate css-truncate-target width-fit color-text-primary">
                     <span>
-                      {{ with $profile.status }}
+                      {{ with $profile.statusText }}
                       <div>{{ . }}</div>
                       {{ end }}
                     </span>
@@ -49,6 +50,8 @@
           </div>
         </div>
       </div>
+      {{ end }}
+
       {{- end -}}
     </div>
 
