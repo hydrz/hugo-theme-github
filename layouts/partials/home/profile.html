@@ -59,7 +59,7 @@
         {{- end -}}
 
         {{- with $profile.subtitle -}}
-        <span class="p-nickname vcard-username d-block" itemprop="additionalName">
+        <span class="p-nickname vcard-username d-block mt-2 f4" itemprop="additionalName">
           {{- if $profile.typeit -}}
           {{- $id := dict "Content" . "Scratch" $.Scratch | partial "function/id.html" -}}
           <div id="{{ $id }}" class="typeit"></div>
