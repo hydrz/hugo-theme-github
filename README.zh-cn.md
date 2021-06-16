@@ -1,4 +1,4 @@
-# hugo-theme-github [![github pages](https://github.com/hydrz/hugo-theme-github/actions/workflows/gh-pages.yml/badge.svg?branch=github)](https://github.com/hydrz/hugo-theme-github/actions/workflows/gh-pages.yml)
+# hugo-theme-github [![github pages](https://github.com/hydrz/hugo-theme-github/actions/workflows/gh-pages.yml/badge.svg?branch=master)](https://github.com/hydrz/hugo-theme-github/actions/workflows/gh-pages.yml)
 
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/hydrz/hugo-theme-github?style=flat-square)](https://github.com/hydrz/hugo-theme-github/blob/master/LICENSE)
