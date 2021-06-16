@@ -149,7 +149,7 @@
 {{- end -}}
 
 {{- /* Music */ -}}
-{{- if (.Scratch.Get "this").music -}}
+{{- /* if (.Scratch.Get "this").music */ -}}
     {{- /* APlayer */ -}}
     {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
@@ -161,7 +161,7 @@
     {{- /* MetingJS */ -}}
     {{- $source := $cdn.metingJS | default "lib/meting/Meting.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-{{- end -}}
+{{- /* end */ -}}
 
 {{- /* Cookie Consent */ -}}
 {{- if .Site.Params.cookieconsent | and .Site.Params.cookieconsent.enable -}}

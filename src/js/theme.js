@@ -408,7 +408,7 @@ class Theme {
 
     initMermaid() {
         const $mermaidElements = document.getElementsByClassName('mermaid');
-        if ($mermaidElements.length) {
+        if (typeof (mermaid) != "undefined" && $mermaidElements.length) {
             mermaid.initialize({ startOnLoad: false, theme: 'null' });
             this.util.forEach($mermaidElements, $mermaid => {
                 mermaid.mermaidAPI.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
