@@ -61,4 +61,4 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
-Sitemap: https://hugo-theme-github.dipp.ink/sitemap.xml
+Sitemap: https://hugo-theme-github.hydrz.cn/sitemap.xml

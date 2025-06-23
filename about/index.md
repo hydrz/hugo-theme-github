@@ -97,7 +97,7 @@
 * **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
 * ...
 
-## [Documentation](https://hugo-theme-github.dipp.ink/categories/documentation/)
+## [Documentation](https://hugo-theme-github.hydrz.cn/categories/documentation/)
 
 Build Documentation Locally:
 
@@ -105,7 +105,7 @@ Build Documentation Locally:
 # For Hugo Pipes to process JS files with Babel, see https://gohugo.io/hugo-pipes/babel/
 npm install -g @babel/cli @babel/core
 # For import github style sass file, see https://primer.style/css/
-npm install 
+npm install
 # Run hugo server
 hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender -e production
 ```
