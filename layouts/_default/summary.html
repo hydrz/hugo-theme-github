@@ -21,7 +21,7 @@
                 {{- end -}}
                 {{- with $image -}}
                 <a href="{{ $.RelPermalink }}">
-                    {{- dict "Src" . "Title" $.Description "Resources" $.Resources | partial "plugin/img.html" -}}
+                    {{- dict "Src" . "Title" $.Description "Resources" $.Resources "Width" "100%" | partial "plugin/image.html" -}}
                 </a>
                 {{- end -}}
             </div>
