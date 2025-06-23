@@ -5,7 +5,7 @@ name = "hugo-theme-github"
 license = "MIT"
 licenselink = "https://github.com/hydrz/hugo-theme-github/blob/master/LICENSE"
 description = "A Clean, Elegant but Advanced Hugo Theme for Hugo."
-homepage = "https://hydrz.github.io/hugo-theme-github/"
+homepage = "https://hugo-theme-github.hydrz.cn/"
 tags = ["blog", "clean", "responsive", "dark", "theme"]
 features = [
   "cover-image",

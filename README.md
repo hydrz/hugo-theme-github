@@ -11,9 +11,9 @@ It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt) a
 
 ![hugo-theme-github](images/preview.png)
 
-## [Demo Site](https://hugo-theme-github.dipp.ink/)
+## [Demo Site](https://hugo-theme-github.hydrz.cn/)
 
-To see this theme in action, here is a live [demo site](https://hugo-theme-github.dipp.ink/) which is rendered with **hugo-theme-github** theme.
+To see this theme in action, here is a live [demo site](https://hugo-theme-github.hydrz.cn/) which is rendered with **hugo-theme-github** theme.
 ## Features
 
 * Custom **Header**
@@ -98,7 +98,7 @@ To see this theme in action, here is a live [demo site](https://hugo-theme-githu
 * **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
 * ...
 
-## [Documentation](https://hugo-theme-github.dipp.ink/categories/documentation/)
+## [Documentation](https://hugo-theme-github.hydrz.cn/categories/documentation/)
 
 Build Documentation Locally:
 
@@ -106,7 +106,7 @@ Build Documentation Locally:
 # For Hugo Pipes to process JS files with Babel, see https://gohugo.io/hugo-pipes/babel/
 npm install -g @babel/cli @babel/core
 # For import github style sass file, see https://primer.style/css/
-npm install 
+npm install
 # Run hugo server
 hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender -e production
 ```

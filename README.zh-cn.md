@@ -12,9 +12,9 @@
 
 ![hugo-theme-github](images/preview.png)
 
-## 主题[预览](https://hugo-theme-github.dipp.ink/)
+## 主题[预览](https://hugo-theme-github.hydrz.cn/)
 
-为了直观地浏览主题特性，这里有一个基于 **hugo-theme-github** 主题渲染的 [预览网站](https://hugo-theme-github.dipp.ink/)。
+为了直观地浏览主题特性，这里有一个基于 **hugo-theme-github** 主题渲染的 [预览网站](https://hugo-theme-github.hydrz.cn/)。
 
 ## 特性
 
@@ -100,7 +100,7 @@
 * 支持基于 [cookieconsent](https://github.com/osano/cookieconsent) 的 **Cookie 许可横幅**
 * ...
 
-## [文档](https://hugo-theme-github.dipp.ink/zh-cn/categories/documentation/)
+## [文档](https://hugo-theme-github.hydrz.cn/zh-cn/categories/documentation/)
 
 在本地构建文档:
 
@@ -108,7 +108,7 @@
 # 安装Hugo Pipes Babel依赖, see https://gohugo.io/hugo-pipes/babel/
 npm install -g @babel/cli @babel/core
 # 安装Github样式文件依赖， see https://primer.style/css/
-npm install 
+npm install
 # Run hugo server
 hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender -e production
 ```
