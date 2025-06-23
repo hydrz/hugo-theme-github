@@ -71,8 +71,8 @@
                     {{- with $profile.gravatarEmail -}}
                     {{- $avatar = md5 . | printf "https://cdn.v2ex.com/gravatar/%v?s=240&d=mp" -}}
                     {{- end -}}
-                    {{- $author := $params.author | default .Site.Author.name | default (T "author") -}}
-                    {{- $authorLink := $params.authorlink | default .Site.Author.link | default .Site.Home.RelPermalink -}}
+                    {{- $author := $params.author | default .Site.Params.Author.name | default (T "author") -}}
+                    {{- $authorLink := $params.authorlink | default .Site.Params.Author.link | default .Site.Home.RelPermalink -}}
 
                     <span class="flex-shrink-0 ml-n1 mr-n1 mt-n1 mb-n1">
                         <a rel="author" href="{{ $authorLink }}"><img class="avatar avatar-user" src="{{ $avatar }}" width="24" height="24" alt="{{ $author }}"></a>
